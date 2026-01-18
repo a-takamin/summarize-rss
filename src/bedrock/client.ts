@@ -9,7 +9,7 @@ import { config } from "../config.js";
 import { createLogger } from "../logger.js";
 
 const logger = createLogger("bedrock");
-const client = new BedrockRuntimeClient({ region: config.aws.region });
+const client = new BedrockRuntimeClient({ region: config.bedrock.region });
 
 const SYSTEM_PROMPT = `あなたは DevOps エンジニアのアシスタントです。
 与えられた RSS 記事のタイトル一覧から、DevOps エンジニアにとって有益そうな記事を選別してください。
@@ -33,12 +33,13 @@ const SYSTEM_PROMPT = `あなたは DevOps エンジニアのアシスタント�
 
 export interface FilterResult {
   selectedArticles: Article[];
+  unselectedArticles: Article[];
 }
 
 export async function filterArticles(articles: Article[]): Promise<FilterResult> {
   if (articles.length === 0) {
     logger.debug("No articles to filter");
-    return { selectedArticles: [] };
+    return { selectedArticles: [], unselectedArticles: [] };
   }
 
   logger.debug`Filtering ${articles.length} articles with model ${config.bedrock.modelId}`;
@@ -68,7 +69,7 @@ ${articleList}`;
 
   if (outputText === "なし" || outputText.trim() === "") {
     logger.debug("No relevant articles found by AI");
-    return { selectedArticles: [] };
+    return { selectedArticles: [], unselectedArticles: articles };
   }
 
   logger.debug`AI response: ${outputText}`;
@@ -78,9 +79,13 @@ ${articleList}`;
     .map((s) => parseInt(s.trim(), 10) - 1)
     .filter((i) => !isNaN(i) && i >= 0 && i < articles.length);
 
+  const selectedIndexSet = new Set(selectedIndices);
   const selectedArticles = selectedIndices
     .map((i) => articles[i])
     .filter((a): a is Article => a !== undefined);
+  const unselectedArticles = articles.filter(
+    (_, i) => !selectedIndexSet.has(i)
+  );
 
-  return { selectedArticles };
+  return { selectedArticles, unselectedArticles };
 }

@@ -35,13 +35,9 @@ export const config = {
     password: useFreshRSSMock ? "" : getEnvOrThrow("FRESHRSS_PASSWORD"),
   },
 
-  // AWS
-  aws: {
-    region: getEnvOrDefault("AWS_REGION", "us-east-1"),
-  },
-
   // Bedrock
   bedrock: {
+    region: getEnvOrDefault("BEDROCK_REGION", "us-east-1"),
     modelId: getEnvOrDefault(
       "BEDROCK_MODEL_ID",
       "us.anthropic.claude-haiku-4-5-20251001-v1:0"
@@ -50,6 +46,7 @@ export const config = {
 
   // SES
   ses: {
+    region: getEnvOrDefault("SES_REGION", "ap-northeast-1"),
     fromAddress: getEnvOrThrow("SES_FROM_ADDRESS"),
     toAddress: getEnvOrThrow("SES_TO_ADDRESS"),
   },

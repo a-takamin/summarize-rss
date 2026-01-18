@@ -37,13 +37,14 @@ async function main(): Promise<void> {
 
     // 2. Bedrock で記事を選別
     logger.info("Filtering articles with Bedrock...");
-    const { selectedArticles } = await filterArticles(articles);
-    logger.info`Selected ${selectedArticles.length} articles`;
+    const { selectedArticles, unselectedArticles } =
+      await filterArticles(articles);
+    logger.info`Selected ${selectedArticles.length} articles, ${unselectedArticles.length} unselected`;
 
-    // // 3. SES でメール送信
-    // logger.info("Sending email via SES...");
-    // await sendEmail(selectedArticles);
-    // logger.info("Email sent successfully");
+    // 3. SES でメール送信
+    logger.info("Sending email via SES...");
+    await sendEmail(selectedArticles, unselectedArticles);
+    logger.info("Email sent successfully");
 
     // 4. 取得した記事をすべて既読にする
     logger.info("Marking all articles as read...");
