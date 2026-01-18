@@ -1,0 +1,6 @@
+node_modules/
+dist/
+
+# 環境変数（機密情報）
+.env.local
+.env

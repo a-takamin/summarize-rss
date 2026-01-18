@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.devcontainer/
+.env
+.env.local
+*.md
+.git/
+.gitignore
+.prettierrc
+eslint.config.js
