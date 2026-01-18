@@ -39,18 +39,18 @@ async function main(): Promise<void> {
     logger.info("Filtering articles with Bedrock...");
     const { selectedArticles } = await filterArticles(articles);
     logger.info`Selected ${selectedArticles.length} articles`;
-    
-    // 3. SES でメール送信
-    logger.info("Sending email via SES...");
-    await sendEmail(selectedArticles);
-    logger.info("Email sent successfully");
-  
+
+    // // 3. SES でメール送信
+    // logger.info("Sending email via SES...");
+    // await sendEmail(selectedArticles);
+    // logger.info("Email sent successfully");
+
     // 4. 取得した記事をすべて既読にする
     logger.info("Marking all articles as read...");
     const articleIds = articles.map((a) => a.id);
     await freshrss.markAsRead(articleIds);
     logger.info("All articles marked as read");
-  
+
     logger.info("Done!");
   }
 }

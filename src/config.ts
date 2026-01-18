@@ -44,7 +44,7 @@ export const config = {
   bedrock: {
     modelId: getEnvOrDefault(
       "BEDROCK_MODEL_ID",
-      "anthropic.claude-4-5-haiku-20250514-v1:0"
+      "us.anthropic.claude-haiku-4-5-20251001-v1:0"
     ),
   },
 

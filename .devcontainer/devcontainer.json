@@ -1,6 +1,9 @@
 {
   "name": "summarize-rss-devcontainer",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  "mounts": [
+    "source=${localEnv:HOME}/.aws,target=/home/node/.aws,type=bind,readonly"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
