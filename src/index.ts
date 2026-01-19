@@ -3,7 +3,7 @@
 import type { IFreshRSSClient } from "./freshrss/client.js";
 import { FreshRSSClient } from "./freshrss/freshrss.js";
 import { MockFreshRSSClient } from "./freshrss/mock.js";
-import { filterArticles } from "./bedrock/client.js";
+import { summarizeArticles } from "./bedrock/client.js";
 import { sendEmail } from "./ses/client.js";
 import { setupLogger, createLogger } from "./logger.js";
 import { config } from "./config.js";
@@ -35,15 +35,14 @@ async function main(): Promise<void> {
       continue;
     }
 
-    // 2. Bedrock で記事を選別
-    logger.info("Filtering articles with Bedrock...");
-    const { selectedArticles, unselectedArticles } =
-      await filterArticles(articles);
-    logger.info`Selected ${selectedArticles.length} articles, ${unselectedArticles.length} unselected`;
+    // 2. Bedrock で記事をカテゴリ別にまとめる
+    logger.info`Summarizing ${articles.length} articles with Bedrock...`;
+    const { result } = await summarizeArticles(articles);
+    logger.info("Summarization complete.");
 
     // 3. SES でメール送信
     logger.info("Sending email via SES...");
-    await sendEmail(selectedArticles, unselectedArticles);
+    await sendEmail(result, articles.length);
     logger.info("Email sent successfully");
 
     // 4. 取得した記事をすべて既読にする
