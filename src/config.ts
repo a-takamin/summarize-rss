@@ -32,7 +32,7 @@ export const config = {
     useMock: useFreshRSSMock,
     baseUrl: useFreshRSSMock ? "" : getEnvOrThrow("FRESHRSS_BASE_URL"),
     username: useFreshRSSMock ? "" : getEnvOrThrow("FRESHRSS_USERNAME"),
-    password: useFreshRSSMock ? "" : getEnvOrThrow("FRESHRSS_PASSWORD"),
+    password: useFreshRSSMock ? "" : getEnvOrThrow("FRESHRSS_API_PASSWORD"),
   },
 
   // Bedrock
