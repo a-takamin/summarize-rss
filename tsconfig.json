@@ -1,0 +1,24 @@
+{
+  // コンパイル対象
+  "include": ["src/**/*.ts"],
+  // コンパイル対象外
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "nodenext",
+    // コンパイル先のJavaScriptバージョン
+    "target": "es2022",
+    // Node.jsの型定義を使用する
+    "types": ["node"],
+
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+
+    "moduleResolution": "nodenext"
+  }
+}

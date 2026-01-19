@@ -1,0 +1,32 @@
+{
+  "name": "summarize-rss",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/index.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write src"
+  },
+  "author": "a-takamin",
+  "license": "MIT",
+  "packageManager": "pnpm@10.28.0",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "3.971.0",
+    "@aws-sdk/client-sesv2": "3.971.0",
+    "@logtape/logtape": "2.0.0",
+    "dotenv": "17.2.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.2",
+    "@types/node": "25.0.9",
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.8.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.53.0"
+  }
+}

@@ -1,0 +1,64 @@
+[
+    {
+        "id": "id1",
+        "crawlTimeMsec": 1700000000000,
+        "timestampUsec": "1700000000000000",
+        "published": 1700000000,
+        "title": "Article Title 1",
+        "canonical": [
+            {
+                "href": "https://example.com/article1"
+            }
+        ],
+        "alternate": [
+            {
+                "href": "https://example.com/article1"
+            }
+        ],
+        "categories": [
+            "user/-/state/com.google/reading-list",
+            "user/-/state/org.freshrss/main",
+            "user/-/label/MyCategory1"
+        ],
+        "origin": {
+            "streamId": "feed/1",
+            "htmlUrl": "https://example.com/feed1",
+            "title": "Feed Title 1"
+        },
+        "summary": {
+            "content": "This is a summary of article 1."
+        },
+        "author": "Author 1"
+    },
+    {
+        "id": "id2",
+        "crawlTimeMsec": 1700000001000,
+        "timestampUsec": "1700000001000000",
+        "published": 1700000001,
+        "title": "Article Title 2",
+        "canonical": [
+            {
+                "href": "https://example.com/article2"
+            }
+        ],
+        "alternate": [
+            {
+                "href": "https://example.com/article2"
+            }
+        ],
+        "categories": [
+            "user/-/state/com.google/reading-list",
+            "user/-/state/org.freshrss/important",
+            "user/-/label/MyCategory2"
+        ],
+        "origin": {
+            "streamId": "feed/2",
+            "htmlUrl": "https://example.com/feed2",
+            "title": "Feed Title 2"
+        },
+        "summary": {
+            "content": "This is a summary of article 2."
+        },
+        "author": "Author 2"
+    }
+]
