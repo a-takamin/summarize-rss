@@ -42,7 +42,8 @@ async function main(): Promise<void> {
 
     // 3. SES でメール送信
     logger.info("Sending email via SES...");
-    await sendEmail(result, articles.length);
+    const title = `【${category}】本日のおすすめ記事！ (${articles.length}件)`;
+    await sendEmail(title, result);
     logger.info("Email sent successfully");
 
     // 4. 取得した記事をすべて既読にする
