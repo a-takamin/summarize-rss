@@ -9,6 +9,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - "src/**"
   workflow_dispatch:
 
 jobs:
@@ -108,7 +110,7 @@ jobs:
           git config user.email "${{ vars.OUCHI_K8S_APP_ID }}+ouchi-k8s[bot]@users.noreply.github.com"
 
           git checkout -b "${BRANCH_NAME}"
-          git add apps/summarize-rss/deployment.yaml
+          git add .
           git commit -m "Update summarize-rss image to ${IMAGE_TAG}"
           git push origin "${BRANCH_NAME}"
 
