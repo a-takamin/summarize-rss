@@ -93,7 +93,7 @@ jobs:
         working-directory: ouchi-k8s
         run: |
           IMAGE_TAG="${{ needs.build-and-push.outputs.tag }}"
-          MANIFEST_PATH="apps/summarize-rss/deployment.yaml"
+          MANIFEST_PATH="apps/summarize-rss/manifests/cronjob.yaml"
           sed -i "s|image: ghcr.io/a-takamin/summarize-rss:.*|image: ghcr.io/a-takamin/summarize-rss:${IMAGE_TAG}|" "${MANIFEST_PATH}"
 
       - name: Create Pull Request
