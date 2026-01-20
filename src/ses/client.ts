@@ -7,11 +7,8 @@ import { createLogger } from "../logger.js";
 const logger = createLogger("ses");
 const client = new SESv2Client({ region: config.ses.region });
 
-export async function sendEmail(
-  body: string,
-  articleCount: number
-): Promise<void> {
-  logger.debug`Sending email with ${articleCount} articles to ${config.ses.toAddress}`;
+export async function sendEmail(title: string, body: string): Promise<void> {
+  logger.debug`Sending email of ${title} articles to ${config.ses.toAddress}`;
 
   const command = new SendEmailCommand({
     FromEmailAddress: config.ses.fromAddress,
@@ -21,7 +18,7 @@ export async function sendEmail(
     Content: {
       Simple: {
         Subject: {
-          Data: `[RSS] 本日のおすすめ記事！ (${articleCount}件)`,
+          Data: title,
           Charset: "UTF-8",
         },
         Body: {
