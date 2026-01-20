@@ -16,6 +16,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    outputs:
+      tag: ${{ steps.datetime.outputs.tag }}
 
     steps:
       - name: Checkout repository
@@ -59,3 +61,46 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  create-manifest-pr:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Checkout ouchi-k8s repository
+        uses: actions/checkout@v6
+        with:
+          repository: a-takamin/ouchi-k8s
+          ssh-key: ${{ secrets.OUCHI_K8S_DEPLOY_KEY }}
+          path: ouchi-k8s
+
+      - name: Update manifest
+        working-directory: ouchi-k8s
+        run: |
+          IMAGE_TAG="${{ needs.build-and-push.outputs.tag }}"
+          MANIFEST_PATH="apps/summarize-rss/deployment.yaml"
+          sed -i "s|image: ghcr.io/a-takamin/summarize-rss:.*|image: ghcr.io/a-takamin/summarize-rss:${IMAGE_TAG}|" "${MANIFEST_PATH}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: ouchi-k8s
+          commit-message: "Update summarize-rss image to ${{ needs.build-and-push.outputs.tag }}"
+          branch: "update-summarize-rss-${{ needs.build-and-push.outputs.tag }}"
+          title: "Update summarize-rss image to ${{ needs.build-and-push.outputs.tag }}"
+          body: |
+            ## Summary
+            Update summarize-rss container image
+
+            ### Changes
+            - Image tag: `${{ needs.build-and-push.outputs.tag }}`
+            - Source commit: ${{ github.sha }}
+            - Source repository: ${{ github.repository }}
+
+            ### Links
+            - [Source commit](${{ github.event.head_commit.url }})
+          labels: automated-pr
