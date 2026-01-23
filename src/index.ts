@@ -7,6 +7,8 @@ import { summarizeArticles } from "./bedrock/client.js";
 import { sendEmail } from "./ses/client.js";
 import { setupLogger, createLogger } from "./logger.js";
 import { config } from "./config.js";
+import { DefaultSummarizationConfigRepository } from "./summarization/summarization.js";
+import { getCategoryConfig } from "./freshrss/freshRSSCategoryConfig.js";
 
 const logger = createLogger("main");
 
@@ -22,11 +24,14 @@ async function main(): Promise<void> {
   await setupLogger();
 
   logger.info("Starting summarize-rss...");
+  const summarizationConfigRepository =
+    new DefaultSummarizationConfigRepository();
 
-  // 1. FreshRSS から未読記事を取得
+  // FreshRSS から未読記事を取得
   logger.info("Fetching unread articles from FreshRSS...");
   const freshrss = createFreshRSSClient();
   const categories = await freshrss.getMyCategories();
+
   for (const category of categories) {
     logger.info`Found folder: ${category}`;
     const articles = await freshrss.getUnreadArticles(category);
@@ -35,9 +40,20 @@ async function main(): Promise<void> {
       continue;
     }
 
-    // 2. Bedrock で記事をカテゴリ別にまとめる
+    // カテゴリに対する設定を取得
+    const freshRSSCategoryConfig = getCategoryConfig(category);
+    if (!freshRSSCategoryConfig) {
+      logger.warn`Category config not found for "${category}", skipping...`;
+      continue;
+    }
+    const summarizeConfig = summarizationConfigRepository.get(
+      freshRSSCategoryConfig.summarizeConfigID
+    );
+    logger.info`Using summarization config: ${freshRSSCategoryConfig.summarizeConfigID}`;
+
+    // Bedrock で記事をカテゴリ別にまとめる
     logger.info`Summarizing ${articles.length} articles with Bedrock...`;
-    const { result } = await summarizeArticles(articles);
+    const { result } = await summarizeArticles(articles, summarizeConfig);
     logger.info("Summarization complete.");
 
     // 3. SES でメール送信
