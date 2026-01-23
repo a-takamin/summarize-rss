@@ -10,7 +10,7 @@ import { createLogger } from "../logger.js";
 
 const logger = createLogger("bedrock");
 const client = new BedrockRuntimeClient({ region: config.bedrock.region });
-const systemPrompt = `あなたはカテゴライズのプロです。ユーザーからの指示に従い、提供された記事リストを適切にカテゴライズし、Markdown で返答してください。`;
+const systemPrompt = `あなたはカテゴライズのプロです。ユーザーからの指示に従い、提供された記事リストを適切にカテゴライズし、HTML フォーマットで返答してください。Markdown は使用せず、HTML のみを使用してください。`;
 
 export interface SummarizeResult {
   result: string;
