@@ -38,10 +38,6 @@ export const config = {
   // Bedrock
   bedrock: {
     region: getEnvOrDefault("BEDROCK_REGION", "us-east-1"),
-    modelId: getEnvOrDefault(
-      "BEDROCK_MODEL_ID",
-      "us.anthropic.claude-sonnet-4-5-20250514-v1:0"
-    ),
   },
 
   // SES
