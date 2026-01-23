@@ -60,7 +60,7 @@ const MOCK_ARTICLES: Article[] = [
 export class MockFreshRSSClient implements IFreshRSSClient {
   async getMyCategories(): Promise<string[]> {
     logger.debug("Mock: Returning mock categories");
-    return ["user/-/label/Tech", "user/-/label/News"];
+    return ["user/-/label/AWS"];
   }
 
   async getUnreadArticles(_id: string): Promise<Article[]> {
