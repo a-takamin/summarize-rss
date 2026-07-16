@@ -13,7 +13,7 @@
   },
   "author": "a-takamin",
   "license": "MIT",
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.34.5",
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "3.971.0",
     "@aws-sdk/client-sesv2": "3.971.0",
