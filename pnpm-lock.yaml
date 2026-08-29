@@ -15,8 +15,8 @@ importers:
         specifier: 3.971.0
         version: 3.971.0
       '@logtape/logtape':
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.3.2
+        version: 2.3.2
       dotenv:
         specifier: 17.2.3
         version: 17.2.3
@@ -141,6 +141,7 @@ packages:
   '@aws-sdk/middleware-websocket@3.971.0':
     resolution: {integrity: sha512-6xsYfJ2kFa8RucaiSEB6F9rhh8mv0xEc7dfOX5lED2HRAPDWTqODKKqJprtCdyYDmT8ICrTZSkensfTsJQU+DQ==}
     engines: {node: '>= 14.0.0'}
+    deprecated: Please update your @aws-sdk client to a more recent version, such as https://github.com/aws/aws-sdk-js-v3/releases/tag/v3.982.0, if using browser-based WebSocket bidirectional streaming.
 
   '@aws-sdk/nested-clients@3.971.0':
     resolution: {integrity: sha512-TWaILL8GyYlhGrxxnmbkazM4QsXatwQgoWUvo251FXmUOsiXDFDVX3hoGIfB3CaJhV2pJPfebHUNJtY6TjZ11g==}
@@ -252,8 +253,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@logtape/logtape@2.0.0':
-    resolution: {integrity: sha512-z9Hp44mIRXAzgxSyQfFQiRuJ78EMnZa6g43UCxyGOO3RgHjn/7q+5OhdbhypkeHjiJRPxv6RmRsyF0S+OOYWnA==}
+  '@logtape/logtape@2.3.2':
+    resolution: {integrity: sha512-SfxHfSdDlTp6tLpYP5uezNitSCTQUB3FZ1MXDbgDBN9t9kvF+XL0rOGTIa/pJcDMy1o9FELaZ25E/Ypmsf5fNQ==}
 
   '@smithy/abort-controller@4.2.8':
     resolution: {integrity: sha512-peuVfkYHAmS5ybKxWcfraK7WBBP0J+rkfUcbHJJKQ4ir3UAUNQI+Y4Vt/PqSzGqgloJ5O1dk7+WzNL8wcCSXbw==}
@@ -610,6 +611,7 @@ packages:
   eslint@9.39.2:
     resolution: {integrity: sha512-LEyamqS7W5HB3ujJyvi0HQK/dtVINZvd5mAAp9eT5S/ujByGjiZLCzPcHVzuXbpJDJF/cxwHlfceVUDZ2lnSTw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -1419,7 +1421,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@logtape/logtape@2.0.0': {}
+  '@logtape/logtape@2.3.2': {}
 
   '@smithy/abort-controller@4.2.8':
     dependencies:
