@@ -17,7 +17,7 @@
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "3.971.0",
     "@aws-sdk/client-sesv2": "3.971.0",
-    "@logtape/logtape": "2.0.0",
+    "@logtape/logtape": "2.3.2",
     "dotenv": "17.2.3"
   },
   "devDependencies": {
