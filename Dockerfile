@@ -1,6 +1,6 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:ecfaec9ed6d810b56388c508f4121597bfbba70d41a6dfeee4d8cad5f295fc32
 
-FROM node:22-slim AS builder
+FROM node:22-slim@sha256:83f487e0a63425e5b4d146fb5e5be574bcbe1b7b843d3ebafdd95eaf7767a7e5 AS builder
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     pnpm prune --prod
 
 # 実行ステージ
-FROM node:22-slim AS runner
+FROM node:22-slim@sha256:83f487e0a63425e5b4d146fb5e5be574bcbe1b7b843d3ebafdd95eaf7767a7e5 AS runner
 
 WORKDIR /app
 
