@@ -21,9 +21,9 @@
     "dotenv": "17.2.3"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.2",
+    "@eslint/js": "9.39.5",
     "@types/node": "25.0.9",
-    "eslint": "9.39.2",
+    "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
     "prettier": "3.8.0",
     "typescript": "5.9.3",
